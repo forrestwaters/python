@@ -3,6 +3,8 @@ import random
 players = [1, 2]
 players[0] = player_1_marker = 'X'
 players[1] = player_2_marker = 'O'
+game_finished = False
+
 
 """Defining main game board for the game"""
 def game_board():
@@ -27,6 +29,7 @@ def coin_flip():
 		player_1_turn = False
 		player_2_turn = True
 
+
 """Section where we take players input and place their piece"""
 def players_turn():
 	if player_1_turn:
@@ -42,12 +45,11 @@ def players_turn():
 				board_spaces = board[index]
 				if players_choice == board_spaces:
 					board = [w.replace(players_choice, current_player) for w in board]
+
 		else:
 			try_again()
 	else:
 		try_again()
-	status_check()
-
 
 """Starts over with players_turn if the wrong value is provided"""
 def try_again():
@@ -63,20 +65,48 @@ def status_check():
 		game_finished = True
 		if board[0] == board[1] == board[2] == player:
 			congrats()
+			break
 		elif board[3] == board[4] == board[5] == player:
 			congrats()
+			break
 		elif board[6] == board[7] == board[8] == player:
 			congrats()
+			break
 		elif board[0] == board[3] == board[6] == player:
 			congrats()
+			break
 		elif board[1] == board[4] == board[7] == player:
 			congrats()
+			break
 		elif board[2] == board[5] == board[8] == player:
 			congrats()
+			break
 		elif board[0] == board[4] == board[8] == player:
 			congrats()
+			break
 		elif board[2] == board[4] == board[6] == player:
 			congrats()
+			break
 		else:
 			game_finished = False
-			players_turn()
+
+def congrats():
+	print "Congrats!"
+	print "You won!"
+	
+
+
+game_board()
+coin_flip()
+print "Welcome to Tic Tac Toe"
+if player_1_turn:
+	print "Player 1 will go first!"
+else:
+	print "Player 2 will go first!"
+
+while game_finished == False:
+	display_board()
+	players_turn()
+	status_check()
+	player_1_turn = not player_1_turn
+	player_2_turn = not player_2_turn
