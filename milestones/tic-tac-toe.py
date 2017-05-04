@@ -38,6 +38,10 @@ def players_turn():
 		current_player = players[1]
 	global board
 	global players_choice
+	if current_player == 'X':
+		print "Player 1's turn!"
+	else:
+		print "Player 2's turn!"
 	players_choice = raw_input("Please select an open space: ")
 	if players_choice.isdigit():
 		if 0 < int(players_choice) < 10:
@@ -91,9 +95,12 @@ def status_check():
 			game_finished = False
 
 def congrats():
+	display_board()
 	print "Congrats!"
-	print "You won!"
-	
+	if player_1_turn:
+		print "Player 1 wins!"
+	else:
+		print "Player 2 wins!"
 
 
 game_board()
